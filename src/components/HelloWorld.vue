@@ -38,14 +38,14 @@ export default {
       console.log("img1.src:"+img1.src)
 
       let canvas = this.$refs.canvas;
-      canvas.width = 1000
-      canvas.height = 1000
+      canvas.width = 2880
+      canvas.height = 1280
       // 获取上下文
       let con = canvas.getContext("2d");
 
       img1.onload = function () {
         console.log("img1onload:"+img1.src)
-        con.drawImage(img1, 0, 0, 800, 800);
+        con.drawImage(img1, 0, 0, 2880, 1280);
 
       let myCanvas = document.getElementById('qrcode').getElementsByTagName('canvas');
       let imgURL=myCanvas[0].toDataURL('image/jpg');
@@ -58,7 +58,7 @@ export default {
           
           console.log("img2onload:"+img2.src)
 
-          con.drawImage(img2, 400, 300, 200, 200);
+          con.drawImage(img2, 448, 348, 268, 268);
           console.log("geturl:"+canvas.toDataURL("image/png"))
           this.infactQrCode = canvas.toDataURL("image/png");
         };
