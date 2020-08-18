@@ -7,12 +7,17 @@
     <br />
     <canvas ref="canvas" class="canvas" width="100%" height="100%"></canvas>
     <img :src="infactQrCode" alt style="width: 100%;height:100%" />
+    <br/>
+    <div id="qrcode"></div>
+
   </div>
 </template>
 
 <script>
 import imgbk from "@/assets/t1.png";
 import imgqr from "@/assets/t2.png";
+import QRCode from 'qrcodejs2'
+
 
 export default {
   name: "HelloWorld",
@@ -42,8 +47,12 @@ export default {
         console.log("img1onload:"+img1.src)
         con.drawImage(img1, 0, 0, 800, 800);
 
+      let myCanvas = document.getElementById('qrcode').getElementsByTagName('canvas');
+      let imgURL=myCanvas[0].toDataURL('image/jpg');
+
       var img2 = new Image();
-      img2.src = imgqr;
+      // img2.src = imgqr;
+      img2.src = imgURL;
 
         img2.onload = function () {
           
@@ -55,9 +64,21 @@ export default {
         };
       };
     },
+     qrcode () {
+            let that = this;
+            let qrcode = new QRCode('qrcode', {
+                width: 200,
+                height: 200,        // 高度
+                text:  'http://127.0.0.1:8080/test/server',   // 二维码内容
+                // render: 'canvas' ,   // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
+                // background: '#f0f',   // 背景色
+                // foreground: '#ff0'    // 前景色
+            })
+        },
   },
   mounted() {
     this.drawcanvas();
+    this.qrcode();
   },
 };
 </script>
